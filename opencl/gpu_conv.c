@@ -58,7 +58,7 @@ gal_conv_gpu(gal_data_t *input_image, gal_data_t *kernel_image,
     clFinish(command_queue);
     end_copy = clock();
     cpu_time_used_copy = ((double)(end_copy - start_copy)) / CLOCKS_PER_SEC;
-    printf("Time taken in copyng input to GPU: %f\n", cpu_time_used_copy);
+    printf("Time taken in copyng input to device: %f\n", cpu_time_used_copy);
 
 
 
@@ -87,7 +87,7 @@ gal_conv_gpu(gal_data_t *input_image, gal_data_t *kernel_image,
     /* launch the kernel */
     ret = clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, &global_item_size, 
                                     &local_item_size, 0, NULL, NULL);
-
+    
     clFinish(command_queue);
     end_conv = clock();
     cpu_time_used_conv = ((double)(end_conv - start_conv)) / CLOCKS_PER_SEC;
